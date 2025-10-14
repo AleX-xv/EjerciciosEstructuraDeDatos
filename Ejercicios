@@ -1,19 +1,70 @@
+    EJERCICIO 8 [BÁSICO]: Análisis de Suma de Elementos
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    📝 ENUNCIADO:
+    Analizar la complejidad del siguiente algoritmo que suma todos los elementos
+    de una lista.
+    
+    🔹 PSEUDOCÓDIGO:
+       Función sumaElementos(lista):
+           suma ← 0
+           Para cada elemento en lista:
+               suma ← suma + elemento
+           Retornar suma
+    
+    Resuelto-
+    
+    def sumaElementos(lista):
+        suma = 0
+        for elemento in lista:
+            suma = suma + elemento
+        return suma
+    
+    #Ejemplo de Uso
+    numeros = [2, 4, 6, 8, 10]
+    resultado = sumaElementos(numeros)
+    print("La suma de los elementos es:", resultado)
+    
+    #Analisis de complejidad
+    """Operación principal: la instrucción suma = suma + elemento
+    se ejecuta una vez por cada elemento de la lista.
+    Si la lista tiene N elementos:   
+    El bucle for elemento in lista: se ejecuta N veces.
+    Por tanto, el tiempo de ejecución crece linealmente con n.
+    La Complejidad temporal O(n), La complejidad espacial O(1)"""
+    
+    EJERCICIO 9 [BÁSICO]: Comparar Complejidades
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-def sumaElementos(lista):
-    suma = 0
-    for elemento in lista:
-        suma = suma + elemento
-    return suma
+📝 ENUNCIADO:
+Ordenar las siguientes complejidades de menor a mayor eficiencia:
+O(n²), O(1), O(log n), O(n log n), O(2ⁿ), O(n), O(n³)
 
-#Ejemplo de Uso
-numeros = [2, 4, 6, 8, 10]
-resultado = sumaElementos(numeros)
-print("La suma de los elementos es:", resultado)
+Además, indicar cuál sería preferible para un dataset de 1 millón de elementos.
 
-#Analisis de complejidad
-"""Operación principal: la instrucción suma = suma + elemento
-se ejecuta una vez por cada elemento de la lista.
-Si la lista tiene N elementos:
-El bucle for elemento in lista: se ejecuta N veces.
-Por tanto, el tiempo de ejecución crece linealmente con n.
-La Complejidad temporal O(n), La complejidad espacial O(1)"""
+
+Resultado------------
+
+
+complejidades = ["O(n²)", "O(1)", "O(log n)", "O(n log n)", "O(2ⁿ)", "O(n)", "O(n³)"]
+
+ordenadas = ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(n³)", "O(2ⁿ)"]
+
+print("🔹 Complejidades originales:")
+print(complejidades)
+
+print("\n🔹 Complejidades ordenadas de menor a mayor eficiencia:")
+print(ordenadas)
+
+print("Para un dataset de 1 millón de elementos, la más recomendable sería O(1)")
+print("seguida de O(log n) o O(n), ya que crecen mucho más lento que las demás")
+
+    
+    
+
+
+
+
+
+
+
