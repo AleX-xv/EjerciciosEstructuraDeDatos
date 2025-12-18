@@ -1,0 +1,37 @@
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.next = None
+
+
+class SLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def agregar(self, dato):
+        nuevo = Nodo(dato)
+        if not self.head:
+            self.head = nuevo
+        else:
+            actual = self.head
+            while actual.next:
+                actual = actual.next
+            actual.next = nuevo
+
+    def count(self, elem):
+        contador = 0
+        actual = self.head
+
+        while actual:
+            if actual.dato == elem:
+                contador += 1
+            actual = actual.next
+
+        return contador
+
+lista = SLinkedList()
+for x in [0, 2, 3, 2, 4, 2]:
+    lista.agregar(x)
+
+print(lista.count(2))  
+print(lista.count(5))  
