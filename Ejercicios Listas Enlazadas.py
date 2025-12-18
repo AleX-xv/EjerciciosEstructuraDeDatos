@@ -481,7 +481,215 @@ Pista: Necesitas cambiar los punteros next de cada nodo.
 """
 
 
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.next = None
 
+
+class SLinkedList:
+    def __init__(self, valores=None):
+        self.head = None
+        self.size = 0
+
+        # Inicialización opcional
+        if valores:
+            for valor in valores:
+                self.agregar(valor)
+
+    def agregar(self, dato):
+        nuevo_nodo = Nodo(dato)
+
+        if self.head is None:
+            self.head = nuevo_nodo
+        else:
+            actual = self.head
+            while actual.next:
+                actual = actual.next
+            actual.next = nuevo_nodo
+
+        self.size += 1
+
+    def reverse(self):
+        """
+        Invierte la lista enlazada en el mismo objeto.
+        Complejidad: O(n)
+        """
+        anterior = None
+        actual = self.head
+
+        while actual:
+            siguiente = actual.next
+            actual.next = anterior
+            anterior = actual
+            actual = siguiente
+
+        self.head = anterior
+
+    def to_string(self):
+        """
+        Representación visual de la lista.
+        """
+        actual = self.head
+        resultado = []
+
+        while actual:
+            resultado.append(str(actual.dato))
+            actual = actual.next
+
+        return " → ".join(resultado) + " → None"
+
+
+# =========================
+# EJECUCIÓN PRINCIPAL
+# =========================
+
+lista = SLinkedList([1, 2, 3, 4, 5])
+lista.reverse()
+
+print(lista.to_string())  
+# 5 → 4 → 3 → 2 → 1 → None
+
+
+# =========================
+# PRUEBAS INTERNAS
+# =========================
+
+def _pruebas_internas():
+    lista = SLinkedList([1, 2, 3])
+    lista.reverse()
+    assert lista.to_string() == "3 → 2 → 1 → None"
+
+    lista_uno = SLinkedList([10])
+    lista_uno.reverse()
+    assert lista_uno.to_string() == "10 → None"
+
+    lista_vacia = SLinkedList()
+    lista_vacia.reverse()
+    assert lista_vacia.to_string() == " → None"
+
+
+_pruebas_internas()
+
+
+
+"""
+EJERCICIO 7: Detectar ciclo
+Dificultad: 🟡 Intermedio
+Tiempo estimado: 30 minutos
+
+Implementa un método has_cycle() que detecte si la lista tiene un ciclo
+(un nodo apunta a un nodo anterior, creando un bucle infinito).
+
+Usa el algoritmo de Floyd (tortuga y liebre):
+- Dos punteros: uno avanza 1 paso, otro avanza 2 pasos
+- Si se encuentran, hay ciclo
+- Si el rápido llega a None, no hay ciclo
+
+Ejemplo:
+    lista normal: 1 → 2 → 3 → None (retorna False)
+    lista con ciclo: 1 → 2 → 3 → (vuelve a 2) (retorna True)
+"""
+
+
+class Nodo:
+    def __init__(self, dato):
+        self.dato = dato
+        self.next = None
+
+
+class SLinkedList:
+    def __init__(self, valores=None):
+        self.head = None
+
+        # Inicialización opcional
+        if valores:
+            for valor in valores:
+                self.agregar(valor)
+
+    def agregar(self, dato):
+        nuevo_nodo = Nodo(dato)
+
+        if self.head is None:
+            self.head = nuevo_nodo
+            return
+
+        actual = self.head
+        while actual.next:
+            actual = actual.next
+
+        actual.next = nuevo_nodo
+
+    def has_cycle(self):
+        """
+        Detecta si la lista tiene un ciclo usando
+        el algoritmo de Floyd (tortuga y liebre).
+        """
+        lento = self.head
+        rapido = self.head
+
+        while rapido and rapido.next:
+            lento = lento.next
+            rapido = rapido.next.next
+
+            if lento == rapido:
+                return True
+
+        return False
+
+
+# =========================
+# EJECUCIÓN PRINCIPAL
+# =========================
+
+# Lista normal
+lista1 = SLinkedList([1, 2, 3])
+print(lista1.has_cycle())  # False
+
+
+# Lista con ciclo
+lista2 = SLinkedList()
+n1 = Nodo(1)
+n2 = Nodo(2)
+n3 = Nodo(3)
+
+lista2.head = n1
+n1.next = n2
+n2.next = n3
+n3.next = n2   # ciclo
+
+print(lista2.has_cycle())  # True
+
+
+# =========================
+# PRUEBAS INTERNAS
+# =========================
+
+def _pruebas_internas():
+    lista = SLinkedList([1, 2, 3, 4])
+    assert lista.has_cycle() is False
+
+    lista_uno = SLinkedList([10])
+    assert lista_uno.has_cycle() is False
+
+    lista_vacia = SLinkedList()
+    assert lista_vacia.has_cycle() is False
+
+    # Crear ciclo manual
+    n1 = Nodo(1)
+    n2 = Nodo(2)
+    n3 = Nodo(3)
+
+    lista_ciclo = SLinkedList()
+    lista_ciclo.head = n1
+    n1.next = n2
+    n2.next = n3
+    n3.next = n1
+
+    assert lista_ciclo.has_cycle() is True
+
+
+_pruebas_internas()
 
 
 
